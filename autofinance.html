@@ -29,23 +29,42 @@
         .filters {
             background: white;
             border-radius: 12px;
-            padding: 16px 20px;
-            margin-bottom: 20px;
+            padding: 14px 20px;
+            margin-bottom: 12px;
             box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+        .filter-group {
             display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
             align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
         }
-        .filters label { font-size: 13px; color: #666; margin-right: 4px; }
-        .filters select, .filters input {
-            padding: 6px 12px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+        .filter-group:last-child { margin-bottom: 0; }
+        .filter-group label {
             font-size: 13px;
-            outline: none;
+            color: #666;
+            min-width: 56px;
+            flex-shrink: 0;
         }
-        .filters select:focus, .filters input:focus { border-color: #4a90d9; }
+        .btn-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        .btn-group .btn {
+            padding: 5px 14px;
+            border: 1px solid #ddd;
+            border-radius: 16px;
+            font-size: 12px;
+            cursor: pointer;
+            background: white;
+            color: #555;
+            transition: all .15s;
+            white-space: nowrap;
+        }
+        .btn-group .btn:hover { border-color: #4a90d9; color: #4a90d9; }
+        .btn-group .btn.active {
+            background: #4a90d9;
+            color: white;
+            border-color: #4a90d9;
+        }
 
         /* 品牌区块 */
         .brand-section {
@@ -173,21 +192,23 @@
         <p>按品牌 / 车型 / 生效时间分类 · 数据更新: 2026-04-21</p>
     </header>
 
-    <!-- 筛选 -->
+    <!-- 筛选：第一行 - 品牌 + 生效周期 -->
     <div class="filters">
-        <label>品牌</label>
-        <select id="filterBrand" onchange="filterTable()">
-            <option value="">全部</option>
-        </select>
-        <label>期限</label>
-        <select id="filterTerm" onchange="filterTable()">
-            <option value="">全部</option>
-            <option value="3">3年</option>
-            <option value="5">5年</option>
-            <option value="7">7年</option>
-        </select>
-        <label>搜索车型</label>
-        <input type="text" id="filterSearch" placeholder="如: Model Y" oninput="filterTable()">
+        <div class="filter-group">
+            <label>品牌</label>
+            <div id="brandBtns" class="btn-group"></div>
+        </div>
+        <div class="filter-group">
+            <label>生效周期</label>
+            <div id="periodBtns" class="btn-group"></div>
+        </div>
+    </div>
+    <!-- 筛选：第二行 - 车型（选品牌后显示） -->
+    <div class="filters" id="modelFilterRow" style="display:none;">
+        <div class="filter-group">
+            <label>车型</label>
+            <div id="modelBtns" class="btn-group"></div>
+        </div>
     </div>
 
     <!-- ========== 比亚迪 ========== -->
@@ -201,7 +222,7 @@
         <div class="model-cards">
 
             <!-- 夏 -->
-            <div class="model-card" data-term="3,7">
+            <div class="model-card" data-term="3,7" data-period="2026-01-02" data-model="夏">
                 <div class="model-name">比亚迪 夏（2026款）</div>
                 <div class="model-meta">2026款 · 起售价 ¥139,800</div>
                 <table class="policy-table">
@@ -239,7 +260,7 @@
         <div class="model-cards">
 
             <!-- i6 -->
-            <div class="model-card" data-term="3,5,7">
+            <div class="model-card" data-term="3,5,7" data-period="2026-03-04" data-model="i6">
                 <div class="model-name">理想 i6</div>
                 <div class="model-meta">2026款 · 起售价 ¥249,800</div>
                 <table class="policy-table">
@@ -283,7 +304,7 @@
         <div class="model-cards">
 
             <!-- Model Y -->
-            <div class="model-card" data-term="5,7">
+            <div class="model-card" data-term="5,7" data-period="2026-03-04" data-model="Model Y">
                 <div class="model-name">Model Y</div>
                 <div class="model-meta">2026款 · 起售价 ¥263,500</div>
                 <table class="policy-table">
@@ -309,7 +330,7 @@
             </div>
 
             <!-- Model 3 -->
-            <div class="model-card" data-term="5,7">
+            <div class="model-card" data-term="5,7" data-period="2026-03-04" data-model="Model 3">
                 <div class="model-name">Model 3</div>
                 <div class="model-meta">2026款 · 起售价 ¥235,500</div>
                 <table class="policy-table">
@@ -347,7 +368,7 @@
         <div class="model-cards">
 
             <!-- ET5 -->
-            <div class="model-card" data-term="7">
+            <div class="model-card" data-term="7" data-period="2026-01-02" data-model="ET5/ET5T">
                 <div class="model-name">蔚来 ET5 / ET5T</div>
                 <div class="model-meta">2026款 · BaaS 起售价约 ¥148,000（含电池 ¥228,000）</div>
                 <table class="policy-table">
@@ -379,7 +400,7 @@
         <div class="model-cards">
 
             <!-- SU7 -->
-            <div class="model-card" data-term="3,7">
+            <div class="model-card" data-term="3,7" data-period="2026-03-04" data-model="SU7">
                 <div class="model-name">小米 SU7（新一代）</div>
                 <div class="model-meta">2026款 · 起售价 ¥215,900</div>
                 <table class="policy-table">
@@ -412,49 +433,125 @@
 </div>
 
 <script>
-function toggleBrand(el) {
-    const section = el.closest('.brand-section');
-    section.classList.toggle('open');
-    el.classList.toggle('open');
+// ── 数据 ──
+const PERIODS = [
+  { value: '', label: '全部' },
+  { value: '2026-01-02', label: '2026年1-2月' },
+  { value: '2026-03-04', label: '2026年3-4月' },
+  { value: '2026-05-06', label: '2026年5-6月' },
+  { value: '2026-07-08', label: '2026年7-8月' },
+  { value: '2026-09-10', label: '2026年9-10月' },
+  { value: '2026-11-12', label: '2026年11-12月' },
+];
+
+let activeBrand = '';
+let activePeriod = '';
+let activeModel = '';
+
+// ── 初始化 ──
+function init() {
+  // 品牌按钮
+  const brands = [];
+  document.querySelectorAll('.brand-section').forEach(s => brands.push(s.dataset.brand));
+  const brandContainer = document.getElementById('brandBtns');
+  const allBrandBtn = makeBtn('全部', '', () => { activeBrand = ''; activeModel = ''; updateModelButtons(); filterAll(); });
+  allBrandBtn.classList.add('active');
+  brandContainer.appendChild(allBrandBtn);
+  brands.forEach(b => {
+    brandContainer.appendChild(makeBtn(b, b, () => {
+      activeBrand = b;
+      activeModel = '';
+      updateModelButtons();
+      filterAll();
+      // 自动展开选中品牌
+      document.querySelectorAll('.brand-section').forEach(s => {
+        if (s.dataset.brand === b) { s.classList.add('open'); s.querySelector('.brand-header').classList.add('open'); }
+      });
+    }));
+  });
+
+  // 周期按钮
+  const periodContainer = document.getElementById('periodBtns');
+  PERIODS.forEach((p, i) => {
+    const btn = makeBtn(p.label, p.value, () => { activePeriod = p.value; filterAll(); });
+    if (i === 0) btn.classList.add('active');
+    periodContainer.appendChild(btn);
+  });
 }
 
-function filterTable() {
-    const brand = document.getElementById('filterBrand').value;
-    const term = document.getElementById('filterTerm').value;
-    const search = document.getElementById('filterSearch').value.toLowerCase();
+function makeBtn(label, value, onClick) {
+  const btn = document.createElement('span');
+  btn.className = 'btn';
+  btn.textContent = label;
+  btn.dataset.value = value;
+  btn.addEventListener('click', function() {
+    // 同组取消 active
+    this.parentElement.querySelectorAll('.btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+    onClick();
+  });
+  return btn;
+}
 
-    document.querySelectorAll('.brand-section').forEach(s => {
-        const bName = s.dataset.brand;
-        const matchBrand = !brand || bName === brand;
+// ── 车型按钮联动 ──
+function updateModelButtons() {
+  const container = document.getElementById('modelBtns');
+  const row = document.getElementById('modelFilterRow');
+  container.innerHTML = '';
 
-        let hasVisible = false;
-        s.querySelectorAll('.model-card').forEach(card => {
-            const name = card.querySelector('.model-name').textContent.toLowerCase();
-            const terms = card.dataset.term || '';
-            const matchTerm = !term || terms.includes(term);
-            const matchSearch = !search || name.includes(search);
-            const visible = matchBrand && matchTerm && matchSearch;
-            card.style.display = visible ? '' : 'none';
-            if (visible) hasVisible = true;
-        });
+  if (!activeBrand) { row.style.display = 'none'; return; }
 
-        s.style.display = hasVisible ? '' : 'none';
-        if (hasVisible) {
-            s.classList.add('open');
-            s.querySelector('.brand-header').classList.add('open');
-        }
+  // 收集该品牌下的车型
+  const models = [];
+  document.querySelectorAll('.brand-section').forEach(s => {
+    if (s.dataset.brand !== activeBrand) return;
+    s.querySelectorAll('.model-card').forEach(card => {
+      const m = card.dataset.model;
+      if (m && !models.includes(m)) models.push(m);
     });
+  });
+
+  if (models.length <= 1) { row.style.display = 'none'; return; }
+
+  row.style.display = '';
+  const allBtn = makeBtn('全部', '', () => { activeModel = ''; filterAll(); });
+  allBtn.classList.add('active');
+  container.appendChild(allBtn);
+  models.forEach(m => {
+    container.appendChild(makeBtn(m, m, () => { activeModel = m; filterAll(); }));
+  });
 }
 
-// 初始化品牌下拉
-const brands = new Set();
-document.querySelectorAll('.brand-section').forEach(s => brands.add(s.dataset.brand));
-const sel = document.getElementById('filterBrand');
-brands.forEach(b => {
-    const opt = document.createElement('option');
-    opt.value = b; opt.textContent = b;
-    sel.appendChild(opt);
-});
+// ── 筛选 ──
+function filterAll() {
+  document.querySelectorAll('.brand-section').forEach(s => {
+    const bName = s.dataset.brand;
+    const matchBrand = !activeBrand || bName === activeBrand;
+
+    let hasVisible = false;
+    s.querySelectorAll('.model-card').forEach(card => {
+      const matchPeriod = !activePeriod || card.dataset.period === activePeriod;
+      const matchModel = !activeModel || card.dataset.model === activeModel;
+      const visible = matchBrand && matchPeriod && matchModel;
+      card.style.display = visible ? '' : 'none';
+      if (visible) hasVisible = true;
+    });
+
+    s.style.display = hasVisible ? '' : 'none';
+    if (hasVisible && activeBrand) {
+      s.classList.add('open');
+      s.querySelector('.brand-header').classList.add('open');
+    }
+  });
+}
+
+function toggleBrand(el) {
+  const section = el.closest('.brand-section');
+  section.classList.toggle('open');
+  el.classList.toggle('open');
+}
+
+init();
 </script>
 
 </body>
