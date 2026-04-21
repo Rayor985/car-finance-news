@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="UTF-8" />
+<title></title>
+<meta
+    name="viewport"
+    content="width=device-width,initial-scale=1.0,maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+/>
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<meta name="renderer" content="webkit" />
+
+<!-- 360搜索智能摘要 -->
+<meta property="og:type" content="news" />
+<meta property="og:title" content="理想汽车丨理想，给车和家赋予生命。" />
+<meta
+    property="og:description"
+    content="理想汽车致力于为家庭打造更安全、更便捷、更舒适的智能电动车，产品包括理想L9(全尺寸六座SUV)、理想L8(中大型六座SUV)、理想L7(中大型五座SUV)。自研增程电动系统、魔毯空悬、智能驾驶、智能空间。"
+/>
+<meta
+    property="og:image"
+    content="https://p.ampmake.com/fed/image/png/d4e456eef7dbf961f28cba4f4c42b7a2.png"
+/>
+
+<meta
+    name="keywords"
+    content="理想汽车，理想，给车和家赋予生命。豪华六座智能电动SUV，豪华电动大型SUV，李想汽车，车和家，没有里程焦虑的智能电动大型SUV，智能汽车，充电加油车，豪华智能SUV，智能电动车，增程电动车，混动SUV，理想社区，理想口碑，理想汽车怎么样，理想ONE怎么样"
+/>
+<meta
+    name="description"
+    content="理想汽车致力于为家庭打造更安全、更便捷、更舒适的智能电动车，产品包括理想L9(全尺寸六座SUV)、理想L8(中大型六座SUV)、理想L7(中大型五座SUV)。自研增程电动系统、魔毯空悬、智能驾驶、智能空间。"
+/>
+<meta name="sogou_site_verification" content="FYa4KKq8om" />
+
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta
+    name="apple-mobile-web-app-title"
+    content="理想汽车丨理想，给车和家赋予生命。"
+/>
+
+<link
+    rel="icon"
+    href="https://www.lixiang.com/favicon.ico"
+    type="image/vnd.microsoft.icon"
+/>
+
+<link
+    rel="apple-touch-icon"
+    href="https://s.ampmake.com/fed/m01/lixiang3/favicon.ico"
+/>
+<link
+    href="https://www.lixiang.com/favicon.ico"
+    rel="shortcut icon"
+    type="image/x-icon"
+/>
+<link
+    href="https://www.lixiang.com/favicon.ico"
+    rel="icon"
+    type="image/x-icon"
+/>
+
+<!--[if (lt IE 11) & (!IEMobile)]>
+    <script>
+        window.location = '/upgrade.html';
+    </script>
+<![endif]-->
+<style>
+    .fn-hide {
+        display: none;
+    }
+</style>
+<script>
+    window.webViewRequestSend = false;
+    var agent = navigator.userAgent;
+    var html = document.documentElement;
+
+    // 是否为低版本IE
+    if (agent.indexOf('MSIE') > -1 && agent.indexOf('Trident') > -1) {
+        if (window.ActiveXObject) window.location = '/upgrade.html';
+    }
+
+    // 是否为ie或edge浏览器
+    var isIE = window.ActiveXObject || 'ActiveXObject' in window;
+    var isEdge = agent.indexOf('Edge') > -1;
+
+    if (isIE || isEdge) {
+        html.classList.add('isms');
+    }
+
+    // 获取cookie
+    function getCookie(name) {
+        if (document.cookie.length > 0) {
+            var start = document.cookie.indexOf(name + '=');
+            if (start !== -1) {
+                start = start + name.length + 1;
+                var end = document.cookie.indexOf(';', start);
+                if (end === -1) end = document.cookie.length;
+                return unescape(document.cookie.substring(start, end));
+            }
+        }
+        return '';
+    }
+
+    // 设置Cookie
+    function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+        var expires = exdays ? 'expires=' + d.toUTCString() : ''; // exdays传0 设置为临时session cookie
+        if (location.host.indexOf('.lixiang.com') >= 0) {
+            document.cookie =
+                cname +
+                '=' +
+                cvalue +
+                '; ' +
+                expires +
+                '; domain=.lixiang.com; path=/';
+        } else {
+            document.cookie =
+                cname + '=' + cvalue + '; ' + expires + '; path=/';
+        }
+    }
+
+    // 百度品专
+    if (location.search.indexOf('from=baidu') >= 0) {
+        var fromBaidu = getCookie('fromBaidu');
+        if (!fromBaidu) {
+            setCookie('fromBaidu', 1, 0);
+        }
+    }
+
+    // 是否为理想汽车App客户端
+    var isapp = /isapp=1/.test(document.cookie);
+    if (isapp) {
+        html.classList.add('isapp');
+        // 安卓状态栏高度
+        var statusbarHeight = getCookie('statusbarHeight');
+        if (statusbarHeight) {
+            html.classList.add('isandroid');
+            var style = document.createElement('style');
+            statusbarHeight = Number(statusbarHeight);
+            statusbarHeight = Number.isNaN(statusbarHeight)
+                ? 20
+                : statusbarHeight;
+            style.innerHTML =
+                ':root { --statusbarHeight: ' + statusbarHeight + 'px; }';
+            document.head.appendChild(style);
+        }
+    }
+
+    // 是否为第三方小程序
+    var isWxapp = /miniProgram/i.test(agent);
+    var isBdapp = /swan\//.test(agent);
+    var isTtapp = /toutiaomicroapp/i.test(agent);
+    var isThirdapp = isWxapp || isBdapp || isTtapp;
+    if (isThirdapp) {
+        html.classList.add('isthirdapp');
+        document.title = document.title.replace(
+            '理想汽车丨理想，给车和家赋予生命。丨',
+            ''
+        );
+    }
+
+    // 是否为百度小程序
+    var isbaiduminapp = /baiduMinApp=1/i.test(document.cookie);
+    if (isbaiduminapp) {
+        html.classList.add('isbaiduminapp');
+    }
+
+    // webapp全屏
+    if ('standalone' in window.navigator && window.navigator.standalone) {
+        var noddy,
+            remotes = false;
+        document.addEventListener(
+            'click',
+            function(event) {
+                noddy = event.target;
+                if (noddy) {
+                    while (noddy.nodeName !== 'A' && noddy.nodeName !== 'HTML')
+                        noddy = noddy.parentNode;
+                    if (
+                        'href' in noddy &&
+                        noddy.href.indexOf('http') !== -1 &&
+                        (noddy.href.indexOf(document.location.host) !== -1 ||
+                            remotes)
+                    ) {
+                        event.preventDefault();
+                        document.location.href = noddy.href;
+                    }
+                }
+            },
+            false
+        );
+    }
+</script>
+<script>
+    var globalData = {"isServerEnv":true,"apiPrefix":"https://api-web.lixiang.com","env":"prod"};
+</script>
+
+
+<link href="https://p.ampmake.com/fed/m01/chunk-2604/css/help/topic.6a53ee00.css" rel="stylesheet" />
+<!-- 顶象无感验证SDK -->
+<script>
+    (function() {
+        const dxUrl =
+            'https://p.ampmake.com/fed/text/javascript/86624a0b0bd9daf1ad5e38fc352e23af.js';
+        !(function() {
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.async = true;
+            script.type = 'text/javascript';
+            script.src = dxUrl;
+            head.appendChild(script);
+        })();
+    })();
+</script>
+
+        <style></style>
+    </head>
+
+    <body class="body-animation act page-padding">
+        <div id="chj-header">
+    <header style="opacity: 0">
+        <div class="pcHeader-inner">
+            <div
+                class="pcHeader-aside pcHeader-logo"
+                lxtrack-event="header_logo"
+            >
+                <a href="/" class="header-logo-image"></a>
+            </div>
+            <ul class="pcHeader-menu loginHide">
+                <li
+                    lxtrack-event="click_5dx170BH37"
+                    class="key0click_5dx170BH37"
+                >
+                    <a href="/L7">理想L7</a>
+                </li>
+                <li
+                    lxtrack-event="click_w4i57365i7"
+                    class="key1click_w4i57365i7"
+                >
+                    <a href="/L8">理想L8</a>
+                </li>
+                <li
+                    lxtrack-event="c_default_2Ks229A7pb"
+                    class="key2c_default_2Ks229A7pb"
+                >
+                    <a href="/L9">理想L9</a>
+                </li>
+                <li
+                    lxtrack-event="c_default_2Ks229A7pb"
+                    class="key2c_default_2Ks229A7pb"
+                >
+                    <a href="/mega">理想MEGA</a>
+                </li>
+                <li
+                    lxtrack-event="c_default_Q5226302Jm"
+                    class="key5c_default_Q5226302Jm"
+                >
+                    <a href="/support/store/findus">门店</a>
+                </li>
+                <li
+                    lxtrack-event="c_default_2HqxlMSUbx"
+                    class="key6c_default_2HqxlMSUbx"
+                >
+                    <a href="/community/list">社区</a>
+                </li>
+                <li
+                    lxtrack-event="c_default_3938vT40fk"
+                    class="key7c_default_3938vT40fk"
+                >
+                    <a href="/koubei/list">口碑</a>
+                </li>
+                <li
+                    lxtrack-event="c_default_s5uk6HhR7S"
+                    class="key8c_default_s5uk6HhR7S"
+                >
+                    <div class="pcHeader-submenu">
+                        <span
+                            >关于我们<i
+                                class="lxiconfont lxiconfont-arrowdown-small"
+                            ></i
+                        ></span>
+                        <ul class="pcHeader-submenu-list">
+                            <li lxtrack-event="c_default_8vb9F7Z5r8" class="">
+                                <a href="/about.html">理想汽车</a>
+                            </li>
+                            <li lxtrack-event="c_default_26x5T09sv4" class="">
+                                <a href="/employ.html">加入我们</a>
+                            </li>
+                            <li lxtrack-event="c_default_d4d1d74g55" class="">
+                                <a href="/news.html">媒体中心</a>
+                            </li>
+                            <li lxtrack-event="c_default_H5K06sQ709" class="">
+                                <a href="/help.html">帮助中心</a>
+                            </li>
+                            <li lxtrack-event="c_default_2i4MH33VS6" class="">
+                                <a href="https://ir.lixiang.com/">投资者关系</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+            <div class="pcHeader-aside loginHide">
+                <div
+                    class="pcHeader-drive"
+                    lxtrack-event="c_default_F3P2f0gBr2"
+                >
+                    <a href="/drive/shop.html">预约体验</a>
+                </div>
+                <div class="pcHeader-login" lxtrack-event="header_login">
+                    <span>登录</span>
+                </div>
+                <div class="pcHeader-language" lxtrack-event="header_language">
+                    <ul class="pcHeader-menu">
+                        <li>
+                            <div class="pcHeader-submenu">
+                                <span
+                                    >语言<i
+                                        class="lxiconfont lxiconfont-arrowdown-small"
+                                    ></i
+                                ></span>
+                                <ul class="pcHeader-submenu-list">
+                                    <li>
+                                        <a class="disabled" href="javascript:;"
+                                            >中文</a
+                                        >
+                                    </li>
+                                    <li>
+                                        <a href="https://www.lixiang.com/en"
+                                            >EN</a
+                                        >
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>
+
+        <div class="chj-content">
+            <div id="animation" class="animation-help">
+                <div class="help-content">
+                    <div class="article">
+                        <div class="m-h1">
+                            金融方案
+                        </div>
+                        <div class="m-exp1">
+                            
+                        </div>
+                        <div id="article" class="article-content fn-wb">
+                            <p><span style="font-weight: bold;">限时3年0息</span></p> 
+<p>1-3年期，首付7.98万元起，年费率0%（年化利率0%）</p> 
+<p>服务机构：中国银行、建设银行、交通银行、招商银行、平安银行、微众银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月30日24:00前完成定金支付的用户（1月5日24:00前下定用户，购置税和金融贴息政策二选一）</p> 
+<p>适用车型：理想i6</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时3年0息</span></p> 
+<p>1-3年期，首付9.98万元起，年费率0%（年化利率0%）</p> 
+<p>服务机构：中国银行、建设银行、交通银行、招商银行、平安银行、微众银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的用户</p> 
+<p>适用车型：理想i8</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时5年0息</span></p> 
+<p>1-5年期，首付9.98万元起，年费率0%（年化利率0%）</p> 
+<p>服务机构：中国银行、建设银行、交通银行、招商银行、平安银行、微众银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的用户</p> 
+<p>适用车型：理想MEGA</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时5年低息</span></p> 
+<p>1-5年期，首付0元起，年费率0.99%（按单利折算年化利率1.82%~1.92%）</p> 
+<p>服务机构：中国银行、建设银行、交通银行、招商银行、平安银行、微众银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的用户</p> 
+<p>适用车型：理想MEGA、理想i8</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时5年低息</span></p> 
+<p>1-5年期，首付0元起，年费率1.49%（按单利折算年化利率2.74%~2.86%）</p> 
+<p>服务机构：中国银行、建设银行、交通银行、招商银行、平安银行、微众银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月30日24:00前完成定金支付的用户（1月5日24:00前下定用户，购置税和金融政策二选一）</p> 
+<p>适用车型：理想i6</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时5免3产品</span></p> 
+<p>5年期，首付7.98万元起，前三年费率0%（年化利率0%），后两年费率1.99%（按单利折算年化利率3.80%）</p> 
+<p>服务机构：中国银行、建设银行、平安银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月30日24:00前完成定金支付的用户（1月5日24:00前下定用户，购置税和金融贴息政策二选一）</p> 
+<p>适用车型：理想i6</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时5免3产品</span></p> 
+<p>5年期，首付9.98万元起，前三年费率0%（年化利率0%），后两年费率1.99%（按单利折算年化利率3.80%）</p> 
+<p>服务机构：中国银行、建设银行、平安银行、中信银行、易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的用户</p> 
+<p>适用车型：理想i8</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">年费率1.99%</span></p> 
+<p>1-5年期，首付0元起，年费率1.99%（按单利折算年化利率3.65%~3.80%）</p> 
+<p>金融服务机构：中国银行、建设银行、交通银行、中信银行</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想L9、理想L8、理想L7、理想L6用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">年费率2.50%</span></p> 
+<p>1-5年期，首付0元起，年费率2.50%（按单利折算年化利率4.58%~4.76%）</p> 
+<p>金融服务机构：招商银行、平安银行、微众银行</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想L9、理想L8、理想L7、理想L6用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">超长期产品</span></p> 
+<p>6-7年期，首付15%起，年费率1.99%（按单利折算年化利率3.65%~3.80%）</p> 
+<p>金融服务机构：中信银行</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想L9、理想L8、理想L7、理想L6用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">超长期产品</span></p> 
+<p>6-7年期，首付15%起，年费率2.50%（按单利折算年化利率4.69%~4.71%）</p> 
+<p>金融服务机构：易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想L9、理想L8、理想L7、理想L6用户</p> 
+<p><span style="font-weight: bold;"><br></span></p> 
+<p><span style="font-weight: bold;">限时7免3产品</span></p> 
+<p>7年期，首付7.98万起，前3年0息，后4年费率1.99%（按单利折算年化利率3.77%~3.80%）</p> 
+<p>金融服务机构：中信银行</p> 
+<p>适用客户：2026年04月30日24:00前完成定金支付的理想i6用户（1月5日24:00前下定用户，购置税和金融贴息政策二选一）</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时7免3产品</span></p> 
+<p>7年期，首付7.98万起，前3年0息，后4年费率2.50%（按单利折算年化利率4.69%~4.75%）</p> 
+<p>金融服务机构：易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想i6用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时7免3产品</span></p> 
+<p>7年期，首付9.98万起，前3年0息，后4年费率1.99%（按单利折算年化利率3.77%~3.80%）</p> 
+<p>金融服务机构：中信银行</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想i8用户</p> 
+<p><span style="font-weight: bold;"><br></span></p> 
+<p><span style="font-weight: bold;">限时7免3产品</span></p> 
+<p>7年期，首付9.98万起，前3年0息，后4年费率2.50%（按单利折算年化利率4.69%~4.75%）</p> 
+<p>金融服务机构：易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想i8用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时7免5产品</span></p> 
+<p>7年期，首付9.98万起，前5年0息，后两年费率1.99%（按单利折算年化利率3.77~3.78%）</p> 
+<p>金融服务机构：中信银行</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想MEGA用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">限时7免5产品</span></p> 
+<p>7年期，首付9.98万起，前5年0息，后两年费率2.5%（按单利折算年化利率4.69~4.71%）</p> 
+<p>金融服务机构：易鑫集团</p> 
+<p>适用客户：2026年04月01日～2026年04月30日24:00前完成定金支付的理想MEGA用户</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">常规产品</span></p> 
+<p>① 1-5年期，首付15%起，年费率区间为2.99%~3.99%（按单利折算年化利率5.47%~7.49%）</p> 
+<p>金融服务机构：易鑫集团、平安融资租赁</p> 
+<p>适用车型：理想i6、理想MEGA、理想i8</p> 
+<p>②1-5年期，0首付起，年费率2.99%（按单利折算年化利率5.47%~5.66%）</p> 
+<p>金融服务机构：华晨东亚汽车金融</p> 
+<p>适用车型：理想i6、理想MEGA、理想i8</p> 
+<p>③1-5年期，首付15%起，年费率3.99%（按单利折算年化利率7.29%~7.49%）</p> 
+<p>金融服务机构：天下达融资租赁</p> 
+<p>适用车型：理想i6、理想MEGA、理想i8</p> 
+<p>④1-5年期，首付15%起，年费率区间为1.99%~4.60%（按单利折算年化利率3.65%~8.60%）</p> 
+<p>金融服务机构：易鑫集团、平安融资租赁</p> 
+<p>适用车型：理想L9、理想L8、理想L7、理想L6</p> 
+<p>⑤1-5年期，0首付起，年费率3.60%（按单利折算年化利率6.58%~6.78%）</p> 
+<p>金融服务机构：华晨东亚汽车金融</p> 
+<p>适用车型：理想L9、理想L8、理想L7、理想L6</p> 
+<p>⑥1-5年期，首付15%起，年费率4.99%（按单利折算年化利率9.09%~9.31%）</p> 
+<p>金融服务机构：天下达融资租赁</p> 
+<p>适用车型：理想L9、理想L8、理想L7、理想L6</p> 
+<p><br></p> 
+<p>*理想汽车向您展示的金融产品由具有合法资质的金融服务机构提供，理想汽车不向您收取任何金融服务费，您可以结合自身需求灵活选择金融产品。</p> 
+<p>*金融服务机构会根据您的职业、地区、国籍、资信等情况为您确定最终的金融方案（贷款融资额度、贷款融资利率、贷款融资期限等），具体以金融服务机构审批结果及签署协议为准。</p> 
+<p>*金融服务机构实际的可展业城市，以理想汽车APP实际可选城市进件为准，您也可以通过拨打理想客服电话400-686-0900 或身边的产品专家进行咨询。</p> 
+<p>*平安融资租赁指平安集团旗下平安国际融资租赁有限公司和平安国际融资租赁（天津）有限公司提供融资租赁产品，车辆上牌登记在用户名下，租赁期满后依约取得车辆所有权。</p> 
+<p>*易鑫集团指易鑫集团旗下天津恒通嘉合融资租赁有限公司提供融资租赁产品，车辆上牌登记在用户名下，租赁期满后依约取得车辆所有权。 </p> 
+<p>*天下达融资租赁指天下达融资租赁（厦门）有限公司提供融资租赁产品，车辆上牌登记在天下达融资租赁子公司名下，租赁期满后依约取得车辆所有权。</p> 
+<p>*以上金融产品可点击<a href="https://www.lixiang.com/mall/one/calc.html" target="_blank" style="background-color: rgb(255, 255, 255);">金融试算器</a>试算。</p> 
+<p><br></p> 
+<p><span style="font-weight: bold;">金融申请流程</span></p> 
+<p>以下为金融申请常规流程，具体以金融服务机构的要求为准。</p> 
+<p> 
+ <img data-index="0" class="js-imageview" src="https://p.ampmake.com/lixiangzhizao_app/pc_push_system/253742017974994.jpeg"><br></p> 
+<p>*定购时选择的金融方案仅为试算方案，待订单过犹豫期后系统将自动为您开启金融申请，您可以重新选择合适的金融服务机构进行购</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- M端图片预览 -->
+                <div
+                    id="pswp"
+                    class="pswp"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-hidden="true"
+                >
+                    <div class="pswp__bg"></div>
+                    <div class="pswp__scroll-wrap">
+                        <div class="pswp__container">
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                            <div class="pswp__item"></div>
+                        </div>
+                    </div>
+                    <div class="pswp__close">
+                        <i class="iconfont iconfont-cancel"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="chj-footer" class="chj-footer" :class="footerClass">
+    <div id="chj-footer-nav"></div>
+    <div id="chj-footer-bottom">
+        <div class="chj-footer-inner">
+            <div class="chj-footer-inner-cell cell-top">
+                <div class="chj-footer-link">
+                    <a class="mobile-hide" href="/autoinfo/index.html"
+                        >维修与环保信息</a
+                    >
+                    <a href="/agreement/legal.html">法律与安全</a>
+                    <a href="/agreement/privacy.html">隐私政策</a>
+                    <a href="/help/topic/spray.html">钣喷中心</a>
+                </div>
+                <div class="chj-footer-icon" ref="footerIcon">
+                    <a
+                        class="chj-footer-icon-app"
+                        href="javascript:;"
+                        @click.stop="popshow('app')"
+                    >
+                        <div
+                            class="chj-footer-popover"
+                            :class="{'popshow': popshow_app}"
+                            @click.stop
+                        >
+                            <div class="popover-qrcode">
+                                <img alt="理想汽车App" />
+                            </div>
+                            <div class="popover-text">扫码下载理想汽车App</div>
+                        </div>
+                        <i
+                            class="iconfont iconfont-app"
+                            :class="{'popshow': popshow_app}"
+                        ></i>
+                    </a>
+                    <a
+                        class="chj-footer-icon-weixin"
+                        href="javascript:;"
+                        @click.stop="popshow('weixin')"
+                    >
+                        <div
+                            class="chj-footer-popover"
+                            :class="{'popshow': popshow_weixin}"
+                            @click.stop
+                        >
+                            <div class="popover-qrcode">
+                                <img alt="理想汽车公众号" />
+                            </div>
+                            <div class="popover-text">
+                                扫码关注理想汽车公众号
+                            </div>
+                        </div>
+                        <i
+                            class="iconfont iconfont-weixin"
+                            :class="{'popshow': popshow_weixin}"
+                        ></i>
+                    </a>
+                    <a
+                        class="chj-footer-icon-weibo"
+                        target="_blank"
+                        href="https://weibo.com/u/6001272153"
+                    >
+                        <i class="iconfont iconfont-weibo"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="chj-footer-inner-cell cell-bottom">
+                <div class="chj-footer-text">
+                    <p>
+                        <span class="chj-footer-text-callIM" @click="callIM"
+                            >在线客服</span
+                        >
+                        <span
+                            ><a href="tel:4006860900"
+                                >客服电话 400-686-0900</a
+                            ></span
+                        >
+                        <span
+                            ><a href="mailto:press@lixiang.com"
+                                >媒体咨询 press@lixiang.com</a
+                            ></span
+                        >
+                    </p>
+                    <!-- <span class="last"><a href="mailto:press@lixiang.com">媒体咨询 press@lixiang.com</a></span> -->
+                </div>
+                <div class="chj-footer-copyright">
+                    <div class="chj-footer-copyright-top">
+                        <span
+                            ><a
+                                target="_blank"
+                                href="https://beian.miit.gov.cn/"
+                                >©2020 京ICP备19003172号</a
+                            ></span
+                        >
+                        <span
+                            ><i class="emblem"></i
+                            ><a
+                                target="_blank"
+                                href="https://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11011302001865"
+                                >京公网安备11011302001865号</a
+                            ></span
+                        >
+                        <span>北京车励行信息技术有限公司@版权所有</span>
+                        <span
+                            >增值电信业务经营许可证：编号京B2-20191092/编号B2-20196074</span
+                        >
+                        <span>
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://www.lixiang.com/picture/preview.html?path=https://p.ampmake.com/fed/image/png/bf2586abadf6d4ce70338b8b3dd6f906.png"
+                            >
+                                营业执照
+                            </a>
+                        </span>
+                        <span>
+                            <a
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                href="https://www.lixiang.com/picture/preview.html?path=https://p.ampmake.com/fed/image/png/87a77c4fc13e7bc3a98b402abd6c7695.png"
+                            >
+                                广播电视节目制作经营许可证（京）字第18667号
+                            </a>
+                        </span>
+                        <span
+                            >北京市顺义区高丽营镇恒兴路4号院1幢105室(科技创新功能区)</span
+                        >
+                    </div>
+                    <!-- <div class="chj-footer-copyright-bottom">
+    
+                    </div> -->
+                    <!-- <span>©2019 京ICP备19003172号</span>
+                    <span><i class="emblem"></i><a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502036860">京公网安备11010502036860号</a></span> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+ <input
+    type="hidden"
+    id="timestamp"
+    date-timestamp="4/21/2026, 10:07:01 PM"
+    value="1776780421644"
+/>
+<script>
+    var disableInitWx = false;
+    var pageName = '';
+    var mobileRefresh = false;
+    window.trackPageName = 'help_topic';
+</script>
+<script>
+    (function() {
+        if (globalData.env !== 'prod') {
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src =
+                'https://p.ampmake.com/fed//tmp/egg-multipart-tmp/fed-server-api/2025/03/28/18/accbed5d-240b-4e19-81ba-19065cfa8877.js';
+            head.appendChild(script);
+            script.onload = function() {
+                localStorage.setItem('develop_mode', false);
+                var c = 0;
+                var timer = null;
+                var f = false;
+                var show = false;
+                var active = '';
+                ['click', 'touchstart'].forEach(function(item) {
+                    window.addEventListener(item, () => {
+                        if (active && active !== item) {
+                            return;
+                        }
+                        active = item;
+                        f = true;
+                        if (c === 0) {
+                            clearTimeout(timer);
+                        }
+                        if (f) {
+                            c++;
+                        }
+                        if (!timer) {
+                            timer = setTimeout(() => {
+                                if (c > 10 && !show) {
+                                    show = true;
+                                    var vConsole = new VConsole();
+                                }
+                                clearTimeout(timer);
+                                timer = null;
+                                c = 0;
+                                f = false;
+                            }, 2000);
+                        }
+                    });
+                });
+            };
+        }
+    })();
+</script>
+<!-- chunks begin -->
+
+<script src="https://p.ampmake.com/fed/m01/chunk-2604/js/0.ad7ebc21.js"></script>
+
+<script src="https://p.ampmake.com/fed/m01/chunk-2604/js/1.b991ef03.js"></script>
+
+<script src="https://p.ampmake.com/fed/m01/chunk-2604/js/help/topic.6772766f.js"></script>
+<!-- chunks end -->
+
+        <script>
+            /* eslint-disable */
+            window.contentTitle = '金融方案';
+            window.helpId = '1036';
+        </script>
+    </body>
+</html>
