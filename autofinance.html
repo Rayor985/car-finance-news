@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汽车金融政策汇总</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f0f2f5;
+        }
+        .container { max-width: 960px; margin: 0 auto; padding: 20px; }
+
+        header {
+            background: linear-gradient(135deg, #0d1b2a 0%, #1b2838 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+        header h1 { font-size: 26px; margin-bottom: 8px; }
+        header p { opacity: 0.7; font-size: 13px; }
+
+        /* 筛选栏 */
+        .filters {
+            background: white;
+            border-radius: 12px;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .filters label { font-size: 13px; color: #666; margin-right: 4px; }
+        .filters select, .filters input {
+            padding: 6px 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 13px;
+            outline: none;
+        }
+        .filters select:focus, .filters input:focus { border-color: #4a90d9; }
+
+        /* 品牌区块 */
+        .brand-section {
+            background: white;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .brand-header {
+            display: flex;
+            align-items: center;
+            padding: 16px 20px;
+            cursor: pointer;
+            user-select: none;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .brand-header:hover { background: #fafafa; }
+        .brand-logo {
+            width: 36px; height: 36px;
+            border-radius: 8px;
+            background: #f0f0f0;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 14px; color: #555;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+        .brand-header h2 { font-size: 17px; flex: 1; }
+        .brand-header .count {
+            background: #e8f0fe;
+            color: #4a90d9;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-right: 10px;
+        }
+        .brand-header .arrow { font-size: 12px; color: #999; transition: transform .2s; }
+        .brand-header.open .arrow { transform: rotate(90deg); }
+
+        /* 车型卡片 */
+        .model-cards { padding: 0 20px 16px; display: none; }
+        .brand-section.open .model-cards { display: block; }
+
+        .model-card {
+            border: 1px solid #eee;
+            border-radius: 10px;
+            padding: 16px;
+            margin-top: 12px;
+            transition: box-shadow .15s;
+        }
+        .model-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .model-name {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #1a1a2e;
+        }
+        .model-meta {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        .policy-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        .policy-table th {
+            text-align: left;
+            padding: 6px 8px;
+            background: #f8f9fa;
+            color: #666;
+            font-weight: 500;
+            border-bottom: 1px solid #eee;
+        }
+        .policy-table td {
+            padding: 6px 8px;
+            border-bottom: 1px solid #f5f5f5;
+        }
+        .tag-zero { background: #e6f7e6; color: #2d8a2d; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+        .tag-low  { background: #fff3e0; color: #d48806; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+        .tag-free { background: #e8f0fe; color: #4a90d9; padding: 2px 8px; border-radius: 10px; font-size: 11px; }
+
+        .source-links {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .source-links a {
+            font-size: 12px;
+            color: #4a90d9;
+            text-decoration: none;
+            padding: 3px 10px;
+            border: 1px solid #d0e3f7;
+            border-radius: 6px;
+        }
+        .source-links a:hover { background: #f0f7ff; }
+
+        .validity {
+            font-size: 12px;
+            color: #e67e22;
+            margin-top: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        @media (max-width: 600px) {
+            .container { padding: 10px; }
+            header { padding: 24px 16px; }
+            .filters { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🚗 汽车金融政策汇总</h1>
+        <p>按品牌 / 车型 / 生效时间分类 · 数据更新: 2026-04-21</p>
+    </header>
+
+    <!-- 筛选 -->
+    <div class="filters">
+        <label>品牌</label>
+        <select id="filterBrand" onchange="filterTable()">
+            <option value="">全部</option>
+        </select>
+        <label>期限</label>
+        <select id="filterTerm" onchange="filterTable()">
+            <option value="">全部</option>
+            <option value="3">3年</option>
+            <option value="5">5年</option>
+            <option value="7">7年</option>
+        </select>
+        <label>搜索车型</label>
+        <input type="text" id="filterSearch" placeholder="如: Model Y" oninput="filterTable()">
+    </div>
+
+    <!-- ========== 特斯拉 ========== -->
+    <div class="brand-section open" data-brand="特斯拉">
+        <div class="brand-header open" onclick="toggleBrand(this)">
+            <div class="brand-logo">T</div>
+            <h2>特斯拉 Tesla</h2>
+            <span class="count">2 车型</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="model-cards">
+
+            <!-- Model Y -->
+            <div class="model-card" data-term="5,7">
+                <div class="model-name">Model Y</div>
+                <div class="model-meta">2026款 · 起售价 ¥263,500</div>
+                <table class="policy-table">
+                    <tr><th>方案</th><th>首付</th><th>期限</th><th>费率</th></tr>
+                    <tr>
+                        <td><span class="tag-zero">5年0息</span></td>
+                        <td>¥79,900 起</td>
+                        <td>1-5年</td>
+                        <td>年费率 0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-low">7年超低息</span></td>
+                        <td>¥79,900 起</td>
+                        <td>6-7年</td>
+                        <td>年费率 0.5%（年化 0.98%）</td>
+                    </tr>
+                </table>
+                <div class="validity">⏰ 有效期至 2026-04-30 下单 · 含 ¥8,000 保险补贴（部分版本）</div>
+                <div class="source-links">
+                    <a href="https://www.tesla.cn/financing-calculator" target="_blank">🔗 官方金融计算器</a>
+                    <a href="https://www.tesla.cn/campaign/sales-promo-overview" target="_blank">🔗 官方活动页</a>
+                </div>
+            </div>
+
+            <!-- Model 3 -->
+            <div class="model-card" data-term="5,7">
+                <div class="model-name">Model 3</div>
+                <div class="model-meta">2026款 · 起售价 ¥235,500</div>
+                <table class="policy-table">
+                    <tr><th>方案</th><th>首付</th><th>期限</th><th>费率</th></tr>
+                    <tr>
+                        <td><span class="tag-zero">5年0息</span></td>
+                        <td>¥79,900 起</td>
+                        <td>1-5年</td>
+                        <td>年费率 0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-low">7年超低息</span></td>
+                        <td>¥79,900 起</td>
+                        <td>6-7年</td>
+                        <td>年费率 0.5%（年化 0.98%）</td>
+                    </tr>
+                </table>
+                <div class="validity">⏰ 有效期至 2026-04-30 下单 · 指定版本享 ¥8,000 保险补贴</div>
+                <div class="source-links">
+                    <a href="https://www.tesla.cn/financing-calculator" target="_blank">🔗 官方金融计算器</a>
+                    <a href="https://www.tesla.cn/campaign/sales-promo-overview" target="_blank">🔗 官方活动页</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 小米 ========== -->
+    <div class="brand-section" data-brand="小米">
+        <div class="brand-header" onclick="toggleBrand(this)">
+            <div class="brand-logo">M</div>
+            <h2>小米汽车 Xiaomi</h2>
+            <span class="count">1 车型</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="model-cards">
+
+            <!-- SU7 -->
+            <div class="model-card" data-term="3,7">
+                <div class="model-name">小米 SU7（新一代）</div>
+                <div class="model-meta">2026款 · 起售价 ¥215,900</div>
+                <table class="policy-table">
+                    <tr><th>方案</th><th>首付</th><th>期限</th><th>费率</th></tr>
+                    <tr>
+                        <td><span class="tag-zero">3年0息</span></td>
+                        <td>约 ¥65,000 起</td>
+                        <td>1-3年</td>
+                        <td>年费率 0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-low">7年低息</span></td>
+                        <td>约 ¥65,000 起</td>
+                        <td>4-7年</td>
+                        <td>年化费率约 0.5%（年化 0.98%）</td>
+                    </tr>
+                </table>
+                <div class="validity">⏰ 2026-03-19 ~ 2026-05-05 下单</div>
+                <div class="source-links">
+                    <a href="https://www.xiaomiev.com/finance" target="_blank">🔗 小米汽车金融服务</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 理想 ========== -->
+    <div class="brand-section" data-brand="理想">
+        <div class="brand-header" onclick="toggleBrand(this)">
+            <div class="brand-logo">L</div>
+            <h2>理想汽车 Li Auto</h2>
+            <span class="count">1 车型</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="model-cards">
+
+            <!-- i6 -->
+            <div class="model-card" data-term="3,5,7">
+                <div class="model-name">理想 i6</div>
+                <div class="model-meta">2026款 · 起售价 ¥249,800</div>
+                <table class="policy-table">
+                    <tr><th>方案</th><th>首付</th><th>期限</th><th>费率</th></tr>
+                    <tr>
+                        <td><span class="tag-zero">3年0息</span></td>
+                        <td>¥79,800 起</td>
+                        <td>1-3年</td>
+                        <td>年费率 0%（年化 0%）</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-low">5年低息</span></td>
+                        <td>¥0 起</td>
+                        <td>1-5年</td>
+                        <td>年费率 1.49%（年化 2.74%~2.86%）</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-free">7免3（前3年0息）</span></td>
+                        <td>¥79,800 起</td>
+                        <td>7年</td>
+                        <td>前3年0%，后4年 1.99%~2.50%</td>
+                    </tr>
+                </table>
+                <div class="validity">⏰ 2026-04-30 24:00 前完成定金支付 · 可叠加置换补贴</div>
+                <div class="source-links">
+                    <a href="https://www.lixiang.com/help/loaninstruction.html" target="_blank">🔗 理想官方金融方案</a>
+                    <a href="https://www.lixiang.com/mall/one/calc.html" target="_blank">🔗 金融试算器</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 蔚来 ========== -->
+    <div class="brand-section" data-brand="蔚来">
+        <div class="brand-header" onclick="toggleBrand(this)">
+            <div class="brand-logo">N</div>
+            <h2>蔚来 NIO</h2>
+            <span class="count">1 车型</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="model-cards">
+
+            <!-- ET5 -->
+            <div class="model-card" data-term="7">
+                <div class="model-name">蔚来 ET5 / ET5T</div>
+                <div class="model-meta">2026款 · BaaS 起售价约 ¥148,000（含电池 ¥228,000）</div>
+                <table class="policy-table">
+                    <tr><th>方案</th><th>首付</th><th>期限</th><th>费率</th></tr>
+                    <tr>
+                        <td><span class="tag-low">7年超低息</span></td>
+                        <td>20% 起（约 ¥29,600 BaaS）</td>
+                        <td>84期（7年）</td>
+                        <td>年化费率 0.49%</td>
+                    </tr>
+                </table>
+                <div class="validity">⏰ 限时活动 · 提前还款 0 违约金 0 手续费 · 赠 NOP+ 5年 + 选装 5折</div>
+                <div class="source-links">
+                    <a href="https://www.nio.cn/finance" target="_blank">🔗 蔚来金融服务</a>
+                    <a href="https://auto.news18a.com/news/storys_228599.html" target="_blank">🔗 网通社报道</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== 比亚迪 ========== -->
+    <div class="brand-section" data-brand="比亚迪">
+        <div class="brand-header" onclick="toggleBrand(this)">
+            <div class="brand-logo">B</div>
+            <h2>比亚迪 BYD</h2>
+            <span class="count">1 车型</span>
+            <span class="arrow">▶</span>
+        </div>
+        <div class="model-cards">
+
+            <!-- 夏 -->
+            <div class="model-card" data-term="3,7">
+                <div class="model-name">比亚迪 夏（2026款）</div>
+                <div class="model-meta">2026款 · 起售价 ¥139,800</div>
+                <table class="policy-table">
+                    <tr><th>方案</th><th>首付</th><th>期限</th><th>费率</th></tr>
+                    <tr>
+                        <td><span class="tag-zero">3年0息</span></td>
+                        <td>¥89,800 起</td>
+                        <td>1-3年</td>
+                        <td>年费率 0%</td>
+                    </tr>
+                    <tr>
+                        <td><span class="tag-low">7年低息</span></td>
+                        <td>¥89,800 起</td>
+                        <td>4-7年</td>
+                        <td>年化费率约 0.5%</td>
+                    </tr>
+                </table>
+                <div class="validity">⏰ 限时活动 · 日供低至 ¥29 起（7年方案）· 叠加最高 ¥21,000 置换补贴</div>
+                <div class="source-links">
+                    <a href="https://finance.sina.cn/tech/2026-02-25/detail-inhnzvzk2119369.d.html" target="_blank">🔗 新浪财经报道</a>
+                    <a href="https://zhuanlan.zhihu.com/p/2012229609756832122" target="_blank">🔗 知乎详细分析</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        数据来源：各品牌官网及媒体报道 · 仅供参考，具体以经销商实际方案为准<br>
+        维护者: Joey Chen · 最后更新: 2026-04-21
+    </footer>
+</div>
+
+<script>
+function toggleBrand(el) {
+    const section = el.closest('.brand-section');
+    section.classList.toggle('open');
+    el.classList.toggle('open');
+}
+
+function filterTable() {
+    const brand = document.getElementById('filterBrand').value;
+    const term = document.getElementById('filterTerm').value;
+    const search = document.getElementById('filterSearch').value.toLowerCase();
+
+    document.querySelectorAll('.brand-section').forEach(s => {
+        const bName = s.dataset.brand;
+        const matchBrand = !brand || bName === brand;
+
+        let hasVisible = false;
+        s.querySelectorAll('.model-card').forEach(card => {
+            const name = card.querySelector('.model-name').textContent.toLowerCase();
+            const terms = card.dataset.term || '';
+            const matchTerm = !term || terms.includes(term);
+            const matchSearch = !search || name.includes(search);
+            const visible = matchBrand && matchTerm && matchSearch;
+            card.style.display = visible ? '' : 'none';
+            if (visible) hasVisible = true;
+        });
+
+        s.style.display = hasVisible ? '' : 'none';
+        if (hasVisible) {
+            s.classList.add('open');
+            s.querySelector('.brand-header').classList.add('open');
+        }
+    });
+}
+
+// 初始化品牌下拉
+const brands = new Set();
+document.querySelectorAll('.brand-section').forEach(s => brands.add(s.dataset.brand));
+const sel = document.getElementById('filterBrand');
+brands.forEach(b => {
+    const opt = document.createElement('option');
+    opt.value = b; opt.textContent = b;
+    sel.appendChild(opt);
+});
+</script>
+
+</body>
+</html>
