@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>74炮舰革命（上）- 瑞士卫队</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700;900&family=IBM+Plex+Mono:wght@300;400;500;600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:        #1a2332;
+  --ink-rgb:    26,35,50;
+  --paper:      #faf9f5;
+  --paper-rgb:  250,249,245;
+  --accent:     #8b4513;
+  --accent-rgb: 139,69,19;
+  --muted:      #6b7180;
+
+  --serif-zh:   "Noto Serif SC", "Source Serif 4", serif;
+  --sans-zh:    "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --mono:       "IBM Plex Mono", monospace;
+
+  --w-quote:     min(100%, 48rem);
+  --w-statement: min(100%, 56rem);
+  --w-note:      min(100%, 64rem);
+  --w-default:   min(100%, 76rem);
+  --w-wide:      min(100%, 92rem);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: var(--ink); color: var(--paper); font-family: var(--sans-zh); -webkit-font-smoothing: antialiased; text-wrap: pretty; }
+h1, h2, h3, p, li, blockquote, cite { text-wrap: pretty; }
+
+#deck {
+  position: fixed; inset: 0;
+  width: 10000vw; height: 100vh;
+  display: flex; flex-wrap: nowrap;
+  transition: transform .85s cubic-bezier(.77,0,.175,1);
+  z-index: 10; will-change: transform;
+}
+.slide {
+  width: 100vw; height: 100vh;
+  flex: 0 0 100vw;
+  position: relative;
+  padding: clamp(2rem, 5vw, 5.5rem) clamp(2rem, 6vw, 6.5rem) clamp(1.5rem, 3vw, 3rem);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.slide.dark  { background: var(--ink);   color: var(--paper); }
+.slide.light { background: var(--paper); color: var(--ink);  }
+
+.slide.bare .chrome { display: none; }
+.slide.bare .foot { opacity: .35; }
+
+.slide-body {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.note-stack {
+  width: var(--w-default);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(2rem, 4vh, 3.6rem);
+}
+
+.w-quote     { width: var(--w-quote);     margin-left: auto; margin-right: auto; }
+.w-statement { width: var(--w-statement); margin-left: auto; margin-right: auto; }
+.w-note      { width: var(--w-note);      margin-left: auto; margin-right: auto; }
+.w-default   { width: var(--w-default);   margin-left: auto; margin-right: auto; }
+.w-wide      { width: var(--w-wide);      margin-left: auto; margin-right: auto; }
+
+.center-stage {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.section-title {
+  max-width: 11em;
+  margin: 0 auto;
+  text-align: center;
+}
+.soft-note {
+  max-width: 22em;
+  color: rgba(var(--ink-rgb), .52);
+}
+.slide.dark .soft-note {
+  color: rgba(var(--paper-rgb), .6);
+}
+
+.grid-2-6-6 { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1rem, 3vw, 3rem); flex: 1; min-height: 0; }
+.grid-3       { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: clamp(.8rem, 2vw, 2rem); min-height: 0; }
+
+.callout {
+  font-family: var(--serif-zh); font-weight: 400;
+  font-size: clamp(2rem, 3.5vw, 3.6rem); line-height: 1.45;
+  border-left: 3px solid var(--accent); padding-left: clamp(1rem, 2vw, 1.75rem);
+  max-width: 14em;
+}
+.callout cite { display: block; font-style: normal; font-weight: 500; font-size: clamp(.8rem, 1vw, 1rem); margin-top: 1.8vh; opacity: .6; font-family: var(--mono); }
+
+.guest-mark { display: flex; flex-direction: column; align-items: center; }
+.guest-mark::before {
+  content:""; display: block;
+  width: clamp(2.4rem, 4em, 4.8rem); height: 1px;
+  background: currentColor; opacity: .35;
+  margin-bottom: clamp(1.4rem, 3vh, 2.4rem);
+}
+
+.callout-mark {
+  border-left: none;
+  padding-left: 0;
+  padding-top: clamp(1.6rem, 3vh, 2.4rem);
+  position: relative;
+}
+.callout-mark::before {
+  content:""; position: absolute; top: 0; left: 0;
+  width:  clamp(.5rem, .75vw, .85rem);
+  height: clamp(.5rem, .75vw, .85rem);
+  background: var(--accent); opacity: .7;
+}
+
+.timeline-row { position: relative; }
+.timeline-row::before {
+  content:""; position: absolute;
+  top: clamp(.85rem, 1.6vh, 1.4rem);
+  left: 6%; right: 6%; height: 1px;
+  background: rgba(var(--ink-rgb), .1);
+  z-index: 0;
+}
+.slide.dark .timeline-row::before { background: rgba(var(--paper-rgb), .1); }
+.timeline-row.thick::before { height: 1.5px; opacity: .8; }
+.timeline-node { position: relative; z-index: 1; }
+.timeline-node .meta { padding-right: clamp(.5rem, 1vw, 1rem); display: inline-block; }
+.slide.light .timeline-node .meta { background: var(--paper); }
+.slide.dark .timeline-node .meta { background: var(--ink); }
+
+.summary-num {
+  font-family: var(--serif-zh);
+  font-size: clamp(3.2rem, 7vw, 6.4rem);
+  font-weight: 600;
+  color: var(--accent); opacity: .85;
+  line-height: .95;
+  letter-spacing: 0;
+}
+
+.display-zh   { font-family: var(--serif-zh); font-weight: 900; font-size: clamp(3rem, 7vw, 7rem);   line-height: 1.08; letter-spacing: 0; }
+.h1-zh        { font-family: var(--serif-zh); font-weight: 700; font-size: clamp(2rem, 4.6vw, 4.2rem); line-height: 1.18; letter-spacing: 0; }
+.h2-zh        { font-family: var(--serif-zh); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2.6rem);  line-height: 1.28; }
+.lead-zh      { font-family: var(--serif-zh); font-weight: 400; font-size: clamp(1.5rem, 2vw, 2rem);   line-height: 1.5; }
+.body-zh      { font-family: var(--sans-zh);  font-weight: 400; font-size: clamp(1.5rem, 1.55vw, 1.75rem); line-height: 1.55; }
+.kicker       { font-family: var(--mono); font-size: clamp(.8rem, .9vw, 1rem); text-transform: uppercase; letter-spacing: .15em; opacity: .5; margin-bottom: 1vh; }
+.meta         { font-family: var(--mono); font-size: clamp(.75rem, .8vw, .9rem); letter-spacing: .08em; opacity: .5; }
+
+#nav { position: fixed; left: 50%; bottom: 2.2vh; transform: translateX(-50%); z-index: 30; display: flex; gap: 9px; padding: 7px 14px; border-radius: 999px; background: rgba(0,0,0,.2); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+#nav .dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.3); border: none; padding: 0; cursor: pointer; transition: all .3s ease; }
+#nav .dot.active { background: rgba(255,255,255,.95); width: 20px; border-radius: 999px; }
+.slide.light ~ #nav, .slide.light + #nav { background: rgba(255,255,255,.25); }
+
+.chrome { display: flex; justify-content: space-between; font-family: var(--mono); font-size: clamp(.75rem, .8vw, .9rem); letter-spacing: .1em; text-transform: uppercase; opacity: .45; margin-bottom: 2vh; }
+.foot   { display: flex; justify-content: space-between; font-family: var(--mono); font-size: clamp(.75rem, .8vw, .9rem); letter-spacing: .1em; text-transform: uppercase; opacity: .4; margin-top: auto; padding-top: 2vh; }
+
+.anim-item { opacity: 0; transform: translateY(18px); transition: opacity .55s ease, transform .55s ease; }
+.slide.active .anim-item { opacity: 1; transform: translateY(0); }
+.slide.active .anim-item:nth-child(1)  { transition-delay: .05s; }
+.slide.active .anim-item:nth-child(2)  { transition-delay: .15s; }
+.slide.active .anim-item:nth-child(3)  { transition-delay: .25s; }
+.slide.active .anim-item:nth-child(4)  { transition-delay: .35s; }
+.slide.active .anim-item:nth-child(5)  { transition-delay: .45s; }
+.slide.active .anim-item:nth-child(n+6) { transition-delay: .55s; }
+</style>
+</head>
+<body>
+
+<div id="deck">
+
+<!-- 01 封面 -->
+<section class="slide dark hero active bare" data-theme="dark" data-screen-label="Cover" data-source="BV19DdGBwEjq · 0:00" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement" style="display:flex;flex-direction:column;align-items:center;gap:clamp(1.4rem,3vh,2.4rem)">
+      <div class="kicker anim-item" style="color:var(--accent);opacity:1">风帆海军系列 · 第12集</div>
+      <h1 class="display-zh anim-item" style="max-width:9.5em">74炮舰革命</h1>
+      <p class="lead-zh anim-item" style="max-width:24em;opacity:.62">法国战列舰分级标准空白如何催生三级舰革命</p>
+    </div>
+  </div>
+  <div class="foot" style="width:100%">
+    <div>UP主：瑞士卫队 · B站</div>
+    <div>2026-05-08</div>
+  </div>
+</section>
+
+<!-- 02 语境：1747年英法海战 -->
+<section class="slide light" data-theme="light" data-screen-label="Context" data-source="BV19DdGBwEjq · 0:00-0:42">
+  <div class="chrome"><div>语境 · 1747年春</div><div>02 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">一场输掉的战役<br>却改变了一个时代</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="kicker">背景</div><p class="body-zh">1747年春，法国身陷奥地利王位继承战争，加拿大殖民地告急</p></div>
+        <div class="anim-item"><div class="kicker">兵力对比</div><p class="body-zh">4艘法国战舰对阵14艘英国皇家海军，几乎毫无悬念</p></div>
+        <div class="anim-item"><div class="kicker">结果</div><p class="body-zh">法国舰队遭到全面压制，但这不是故事的全部</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 0:00-0:42</div><div>02 / 19</div></div>
+</section>
+
+<!-- 03 分级制度介绍 -->
+<section class="slide dark" data-theme="dark" data-screen-label="Statement" data-source="BV19DdGBwEjq · 0:42-1:22" style="text-align:center;align-items:center">
+  <div class="chrome" style="width:100%"><div>判断 · 战列舰分级</div><div>03 / 19</div></div>
+  <div class="slide-body" style="align-items:center">
+    <div class="w-note" style="display:flex;flex-direction:column;align-items:center;gap:clamp(1.4rem,3.5vh,2.6rem)">
+      <div class="kicker anim-item">Key Point</div>
+      <h2 class="h1-zh anim-item" style="max-width:13em">提起风帆时代战列舰分级制度，相信不少军事爱好者都很感兴趣</h2>
+      <p class="body-zh anim-item" style="max-width:22em;opacity:.62">各国其实都有属于自己的算法</p>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 0:42-1:22</div><div>03 / 19</div></div>
+</section>
+
+<!-- 04 分级标准三种逻辑 -->
+<section class="slide light bare" data-theme="light" data-screen-label="Statement" data-source="BV19DdGBwEjq · 4:58-5:06" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement">
+      <div class="kicker anim-item" style="margin-bottom:clamp(1.6rem,4vh,3rem)">欧洲各国分级体系三种逻辑</div>
+      <h2 class="display-zh anim-item" style="font-size:clamp(3.2rem,8vw,7.6rem);max-width:11em;letter-spacing:0;text-align:center">舰长 · 编制人数 · 火炮数量</h2>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 4:58-5:06</div><div>04 / 19</div></div>
+</section>
+
+<!-- 05 火炮数量胜出 -->
+<section class="slide dark bare" data-theme="dark" data-screen-label="Statement" data-source="BV19DdGBwEjq · 5:06-5:17" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement">
+      <div class="kicker anim-item" style="margin-bottom:clamp(1.6rem,4vh,3rem)">历史给出的答案</div>
+      <h2 class="display-zh anim-item" style="font-size:clamp(3.2rem,8vw,7.6rem);max-width:11em;letter-spacing:0">战列舰核心价值<br>就是火炮</h2>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 5:06-5:17</div><div>05 / 19</div></div>
+</section>
+
+<!-- 06 欧洲各国分级体系 -->
+<section class="slide light" data-theme="light" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 1:22-4:58">
+  <div class="chrome"><div>欧洲各国分级体系</div><div>06 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">各国都有自己的分级算法</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">俄国</div><p class="body-zh" style="margin-top:1vh">波罗的海与黑海，作战环境与大西洋完全不同，四级分析标准，到1750年前后基本成熟</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">荷兰</div><p class="body-zh" style="margin-top:1vh">低地国家大量港口水深普遍不足5.5米，50米出头的舰长极限，不是不能造大船，而是港口先天不足</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">奥斯曼</div><p class="body-zh" style="margin-top:1vh">按龙骨长度区分等级，不按火炮数量，Zera约等于0.758米，但实际数据往往比现实更勇敢</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 1:22-4:58</div><div>06 / 19</div></div>
+</section>
+
+<!-- 07 奥斯曼的特殊标准 -->
+<section class="slide dark" data-theme="dark" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 3:12-3:40">
+  <div class="chrome"><div>奥斯曼分级标准</div><div>07 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">按龙骨长度区分等级，不是按火炮数量</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">标准单位</div><p class="body-zh" style="margin-top:1vh">Zera，约等于0.758米，由海军上将米马尔西南与金脚弯走船厂确立</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">实际做法</div><p class="body-zh" style="margin-top:1vh">表列86门，实际只装72门，真可被二级舰的面子，三级舰的里子</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">英国对比</div><p class="body-zh" style="margin-top:1vh">英法海军实战时火炮数量经常抽个装在，奥斯曼海军则喜欢反着来</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 3:12-3:40</div><div>07 / 19</div></div>
+</section>
+
+<!-- 08 法国1689年条例的空白 -->
+<section class="slide light bare" data-theme="light" data-screen-label="Statement" data-source="BV19DdGBwEjq · 5:22-5:55" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement">
+      <div class="kicker anim-item" style="margin-bottom:clamp(1.6rem,4vh,3rem)">法国1689年条例</div>
+      <h2 class="display-zh anim-item" style="font-size:clamp(3.2rem,8vw,7.6rem);max-width:11em;letter-spacing:0;text-align:center">71到79炮区间<br>几乎被直接投空</h2>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 5:22-5:55</div><div>08 / 19</div></div>
+</section>
+
+<!-- 09 这不是表格出错 -->
+<section class="slide dark bare" data-theme="dark" data-screen-label="Quote" data-source="BV19DdGBwEjq · 5:55-6:12" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center;text-align:center">
+    <div class="w-quote">
+      <div class="callout callout-mark anim-item" style="max-width:16em;margin:0 auto;text-align:left">
+        这不是表格出错
+        <cite>1689年法国海军条例</cite>
+      </div>
+    </div>
+    <div class="w-default" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:clamp(.8rem,2vw,2rem);margin-top:clamp(2rem,4vh,3rem);text-align:left">
+      <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">背景</div><p class="body-zh" style="margin-top:1vh">由海军大臣克尔被指子三年主导指定</p></div>
+      <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">影响</div><p class="body-zh" style="margin-top:1vh">这是太阳王最重要的海军的法典之一</p></div>
+      <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">核心</div><p class="body-zh" style="margin-top:1vh">背后答案恰恰是74炮舰革命诞生的前夜</p></div>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 5:55-6:12</div><div>09 / 19</div></div>
+</section>
+
+<!-- 10 不如肯Deck结构 -->
+<section class="slide light" data-theme="light" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 6:20-7:43">
+  <div class="chrome"><div>不如肯Deck结构</div><div>10 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">不如肯Deck是什么</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">定义</div><p class="body-zh" style="margin-top:1vh">不连续不贯通的甲板结构，顶层甲板普遍就是不如肯Deck，中部区域明显下沉</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">1671年规定</div><p class="body-zh" style="margin-top:1vh">少于70门炮的新舰必须采用双层完整甲板结构</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">1689年升级</div><p class="body-zh" style="margin-top:1vh">所有少于80门炮的新舰一律按照双层甲板设计，不允许出现半三层甲板方案</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 6:20-7:43</div><div>10 / 19</div></div>
+</section>
+
+<!-- 11 不如肯Deck的四大缺陷 -->
+<section class="slide dark" data-theme="dark" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 7:43-9:00">
+  <div class="chrome"><div>不如肯Deck四大缺陷</div><div>11 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">缺点非常致命</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">战斗效率差</div><p class="body-zh" style="margin-top:1vh">炮组士兵在甲板上移动时需要频繁上下台阶跨越高差，实战中混乱指数直线上升</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">中段防护弱</div><p class="body-zh" style="margin-top:1vh">中部区域往往缺乏完整的舷侧防护，近距离挑帮作战时你的船就是靶场</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">结构强度差</div><p class="body-zh" style="margin-top:1vh">船体中央缺少最关键的结构支撑，在海浪冲击与重炮压力下船体逐渐弯曲</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 7:43-9:00</div><div>11 / 19</div></div>
+</section>
+
+<!-- 12 Broken Deck被淘汰之后 -->
+<section class="slide light bare" data-theme="light" data-screen-label="Statement" data-source="BV19DdGBwEjq · 9:01-9:43" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement">
+      <div class="kicker anim-item" style="margin-bottom:clamp(1.6rem,4vh,3rem)">关键问题</div>
+      <h2 class="display-zh anim-item" style="font-size:clamp(3.2rem,8vw,7.6rem);max-width:11em;letter-spacing:0;text-align:center">Broken Deck被淘汰之后<br>为什么法国仍坚持把71-79炮区控出来</h2>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 9:01-9:43</div><div>12 / 19</div></div>
+</section>
+
+<!-- 13 1689年条例火炮配置 -->
+<section class="slide light" data-theme="light" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 9:15-9:40">
+  <div class="chrome"><div>1689年条例火炮配置</div><div>13 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">三级舰与二级舰的本质区别是尺寸差距</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">三级舰</div><p class="body-zh" style="margin-top:1vh">下层甲板24门炮，中层甲板12或18门炮，上层甲板6至9门轻炮</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">二级舰</div><p class="body-zh" style="margin-top:1vh">下层甲板36门炮，中层甲板18或24门炮，上层甲板6至9门轻炮</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">关键</div><p class="body-zh" style="margin-top:1vh">不是你想装36磅就能装，是船体能否支持足够装载</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 9:15-9:40</div><div>13 / 19</div></div>
+</section>
+
+<!-- 14 不是你想装36磅就能装 -->
+<section class="slide dark bare" data-theme="dark" data-screen-label="Statement" data-source="BV19DdGBwEjq · 9:50-10:08" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement">
+      <div class="kicker anim-item" style="margin-bottom:clamp(1.6rem,4vh,3rem)">核心判断</div>
+      <h2 class="display-zh anim-item" style="font-size:clamp(3.2rem,8vw,7.6rem);max-width:11em;letter-spacing:0;text-align:center">不是你想装36磅就能装<br>船体尺寸决定了火炮等级</h2>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 9:50-10:08</div><div>14 / 19</div></div>
+</section>
+
+<!-- 15 三艘船的对比 -->
+<section class="slide dark" data-theme="dark" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 10:08-12:28">
+  <div class="chrome"><div>三艘船的对比</div><div>15 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">同样是大国旗舰，火力配置差距极大</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">西班牙圣母无言罪号</div><p class="body-zh" style="margin-top:1vh">94门炮，但底层的28门是24磅炮，最大炮甲板长度约46米级，火炮配置弱</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">法国皇家太阳号</div><p class="body-zh" style="margin-top:1vh">104门，底层28门36磅长炮，中层30门18磅长炮，最大炮甲板长度55米级</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">英国海上将领号</div><p class="body-zh" style="margin-top:1vh">底层的28门42磅炮，后因对甲板压力过大改为32磅炮，仍远强于西班牙</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 10:08-12:28</div><div>15 / 19</div></div>
+</section>
+
+<!-- 16 尺寸决定火力 -->
+<section class="slide dark bare" data-theme="dark" data-screen-label="Statement" data-source="BV19DdGBwEjq · 12:28-12:35" style="text-align:center;align-items:center">
+  <div class="slide-body" style="align-items:center">
+    <div class="w-statement">
+      <div class="kicker anim-item" style="margin-bottom:clamp(1.6rem,4vh,3rem)">福利分贪逻辑</div>
+      <h2 class="display-zh anim-item" style="font-size:clamp(3.2rem,8vw,7.6rem);max-width:11em;letter-spacing:0;text-align:center">尺寸决定火力<br>同样的货物<br>小木法下身更多<br>大木法下层更少</h2>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 12:28-12:35</div><div>16 / 19</div></div>
+</section>
+
+<!-- 17 小船装大炮的代价 -->
+<section class="slide light" data-theme="light" data-screen-label="Deconstruct" data-source="BV19DdGBwEjq · 13:00-13:30">
+  <div class="chrome"><div>小船装大炮的代价</div><div>17 / 19</div></div>
+  <div class="slide-body">
+    <div class="note-stack">
+      <h2 class="h1-zh anim-item" style="max-width:13em">小船能不能装大炮？当然能，但一定要付出代价</h2>
+      <div class="grid-3">
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">代价一</div><p class="body-zh" style="margin-top:1vh">减少数量：原本30分钟炮，减至20门</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">代价二</div><p class="body-zh" style="margin-top:1vh">降低口径保留数量：缩短炮管，名义上是36磅炮，实际微缝</p></div>
+        <div class="anim-item"><div class="meta" style="color:var(--accent);opacity:1">后果</div><p class="body-zh" style="margin-top:1vh">吃水加深、航速降低、稳性恶化、炮窗逼近水线、进水沉默风险飙升</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 13:00-13:30</div><div>17 / 19</div></div>
+</section>
+
+<!-- 18 71到79炮区间的真相 -->
+<section class="slide dark" data-theme="dark" data-screen-label="Statement" data-source="BV19DdGBwEjq · 14:30-14:45" style="text-align:center;align-items:center">
+  <div class="chrome" style="width:100%"><div>核心判断</div><div>18 / 19</div></div>
+  <div class="slide-body" style="align-items:center">
+    <div class="w-note" style="display:flex;flex-direction:column;align-items:center;gap:clamp(1.4rem,3.5vh,2.6rem)">
+      <div class="kicker anim-item">71-79炮区间为何被留空</div>
+      <h2 class="h1-zh anim-item" style="max-width:13em;text-align:center">不是数字空白，而是技术空白</h2>
+      <p class="body-zh anim-item" style="max-width:22em;opacity:.62;text-align:center">当时传统双层甲板舰的尺寸条件下，根本无法稳定对应一套标准化的中火力配置</p>
+    </div>
+  </div>
+  <div class="foot" style="width:100%"><div>BV19DdGBwEjq · 14:30-14:45</div><div>18 / 19</div></div>
+</section>
+
+<!-- 19 核心总结 -->
+<section class="slide dark" data-theme="dark" data-screen-label="Summary" data-source="BV19DdGBwEjq · 全文">
+  <div class="chrome"><div>核心总结</div><div>19 / 19</div></div>
+  <div class="slide-body">
+    <div class="w-default" style="display:flex;flex-direction:column;gap:clamp(2rem,5vh,3.5rem)">
+      <div class="anim-item" style="display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start">
+        <div class="summary-num">01</div>
+        <p class="body-zh">1747年英法海战法国输了，但这场海战催生了一场风帆海军的技术革命：74炮舰革命</p>
+      </div>
+      <div class="anim-item" style="display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start">
+        <div class="summary-num">02</div>
+        <p class="body-zh">欧洲各国战列舰分级标准不同：俄国按四级标准，荷兰受港口水深限制，奥斯曼按龙骨长度而非火炮数量</p>
+      </div>
+      <div class="anim-item" style="display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start">
+        <div class="summary-num">03</div>
+        <p class="body-zh">法国1689年条例规定双层甲板舰不超过80门炮，三层甲板舰至少80门炮，导致71-79炮区间成为技术空白</p>
+      </div>
+      <div class="anim-item" style="display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start">
+        <div class="summary-num">04</div>
+        <p class="body-zh">船体尺寸决定火炮等级：小船装大炮必须付出代价，要么减数量，要么缩短炮管，两种方案都会大幅削弱战斗力</p>
+      </div>
+      <div class="anim-item" style="display:grid;grid-template-columns:auto 1fr;gap:clamp(1.5rem,3vw,3rem);align-items:start">
+        <div class="summary-num">05</div>
+        <p class="body-zh">三级舰最多装24磅炮，要装36磅炮必须进入更大型舰体范畴，法国的解决方案催生了74炮三级舰</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><div>BV19DdGBwEjq · 瑞士卫队</div><div>19 / 19</div></div>
+</section>
+
+</div>
+
+<div id="nav"></div>
+
+<script>
+(function() {
+  const deck = document.getElementById('deck');
+  const nav = document.getElementById('nav');
+  const slides = document.querySelectorAll('.slide');
+  let current = 0;
+  const total = slides.length;
+
+  // Build nav dots
+  slides.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    nav.appendChild(dot);
+  });
+
+  function goTo(index) {
+    if (index < 0) index = 0;
+    if (index >= total) index = total - 1;
+    slides[current].classList.remove('active');
+    current = index;
+    slides[current].classList.add('active');
+    deck.style.transform = `translateX(-${current * 100}vw)`;
+    nav.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === current);
+    });
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      e.preventDefault();
+      goTo(current + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      goTo(current - 1);
+    }
+  });
+
+  let startX = 0;
+  deck.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+  deck.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 50) {
+      if (dx < 0) goTo(current + 1);
+      else goTo(current - 1);
+    }
+  });
+})();
+</script>
+</body>
+</html>
